@@ -54,6 +54,9 @@ def proceedingsProcessing (pdf_file_name = 'proceedings.pdf',
 
     #lemmatizer
     lemmatizer = nlp.get_pipe("lemmatizer")
+    
+    #analysis
+    nlp.max_length = nlp.max_length*5 
     doc = nlp(text)
     
     # recupère ensemble des mots
@@ -123,7 +126,7 @@ def proceedingsVisualisation (wordcount, ngramcount,
     # creation wordcloud pour les mots (wordcount)
     dico = wordcount.to_dict()['count']
 
-    wc = WordCloud( max_words=threshold, background_color="white").generate_from_frequencies(dico)
+    wc = WordCloud(width=1600, height=800, max_words=threshold, background_color="white").generate_from_frequencies(dico)
     plt.figure(figsize=figsize)
     plt.imshow(wc)
 
@@ -145,7 +148,7 @@ def proceedingsVisualisation (wordcount, ngramcount,
         k2= str(key[0] + '_' + key[1])
         dico.update({k2:dico_bigram.get(key)})
 
-    wc = WordCloud( max_words=threshold, background_color="white").generate_from_frequencies(dico)
+    wc = WordCloud(width=1600, height=800, max_words=threshold, background_color="white").generate_from_frequencies(dico)
 
     plt.figure(figsize=figsize)
     plt.imshow(wc)
